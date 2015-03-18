@@ -6,14 +6,13 @@ package common
 
 import (
 	"fmt"
+	"github.com/MSOpenTech/packer-hyperv/packer/powershell/hyperv"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/packer"
-	"github.com/MSOpenTech/packer-hyperv/packer/powershell/hyperv"
 )
 
-
-const(
-	vlanId = "1724"
+const (
+	vlanId = "1234"
 )
 
 type StepConfigureVlan struct {
@@ -30,15 +29,15 @@ func (s *StepConfigureVlan) Run(state multistep.StateBag) multistep.StepAction {
 
 	ui.Say("Configuring vlan...")
 
-	err := hyperv.SetNetworkAdapterVlanId(switchName, vlanId)
+	/*err := hyperv.SetNetworkAdapterVlanId(switchName, vlanId)
 	if err != nil {
 		err := fmt.Errorf(errorMsg, err)
 		state.Put("error", err)
 		ui.Error(err.Error())
 		return multistep.ActionHalt
-	}
+	}*/
 
-	err = hyperv.SetVirtualMachineVlanId(vmName, vlanId)
+	err := hyperv.SetVirtualMachineVlanId(vmName, vlanId)
 	if err != nil {
 		err := fmt.Errorf(errorMsg, err)
 		state.Put("error", err)
