@@ -40,7 +40,7 @@ func (s *StepConfigureVlan) Run(state multistep.StateBag) multistep.StepAction {
 	}*/
 	//* added block
 	if s.VlanID == "" {
-		ui.Say("Hadn't config vlan ... ")
+		ui.Say("Coundn't config vlan ... ")
 	}
 	// change vlad param
 	//err := hyperv.SetVirtualMachineVlanId(vmName, vlanId)
