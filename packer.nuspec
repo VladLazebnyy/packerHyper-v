@@ -7,6 +7,7 @@
     <owners>vlaz</owners>
     <projectUrl>https://github.com/VladLazebnyy/packerHyper-v</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package for packer binary artifacts</description>
     <copyright>Copyright 2015</copyright>
      <dependencies>
       <dependency id="SampleDependency" version="1.0" />
