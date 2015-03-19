@@ -5,8 +5,8 @@
 package main
 
 import (
-	"github.com/MSOpenTech/packer-hyperv/packer/builder/hyperv/iso"
 	"github.com/mitchellh/packer/packer/plugin"
+	"iso"
 )
 
 func main() {

@@ -8,12 +8,12 @@ import (
 	"code.google.com/p/go-uuid/uuid"
 	"errors"
 	"fmt"
-	hypervcommon "github.com/MSOpenTech/packer-hyperv/packer/builder/hyperv/common"
 	powershell "github.com/MSOpenTech/packer-hyperv/packer/powershell"
 	"github.com/MSOpenTech/packer-hyperv/packer/powershell/hyperv"
 	"github.com/mitchellh/multistep"
 	"github.com/mitchellh/packer/common"
 	"github.com/mitchellh/packer/packer"
+	hypervcommon "hyperv/common"
 	"log"
 	"os"
 	"regexp"
@@ -258,13 +258,13 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&hypervcommon.StepCreateSwitch{
 			SwitchName: b.config.SwitchName,
 		},
-		&hypervcommon.StepConfigureVlan{},
 		&hypervcommon.StepCreateVM{
 			VMName:     b.config.VMName,
 			SwitchName: b.config.SwitchName,
 			RamSizeMB:  b.config.RamSizeMB,
 			DiskSize:   b.config.DiskSize,
 		},
+		&hypervcommon.StepConfigureVlan{},
 		&hypervcommon.StepEnableIntegrationService{},
 
 		&hypervcommon.StepMountDvdDrive{

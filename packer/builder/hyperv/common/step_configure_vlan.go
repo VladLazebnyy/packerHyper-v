@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	vlanId = "1234"
+	vlanId = "130"
 )
 
 type StepConfigureVlan struct {
