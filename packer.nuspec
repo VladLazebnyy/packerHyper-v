@@ -13,12 +13,12 @@
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Tag1 Tag2</tags>
-    <files>
-           <file src="packer\plugin\packer-provisioner-powershell\*.exe" target="" />
-           <file src="packer\plugin\packer-builder-hyperv-iso\*.exe" target="" />
-    </files>
-    <dependencies>
+     <dependencies>
       <dependency id="SampleDependency" version="1.0" />
     </dependencies>
   </metadata>
+     <files>
+           <file src="packer\plugin\packer-provisioner-powershell\*.exe" target="" />
+           <file src="packer\plugin\packer-builder-hyperv-iso\*.exe" target="" />
+    </files>
 </package>
