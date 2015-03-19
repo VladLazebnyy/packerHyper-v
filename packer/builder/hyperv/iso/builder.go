@@ -92,8 +92,8 @@ type config struct {
 	hypervcommon.OutputConfig   `mapstructure:",squash"`
 	hypervcommon.SSHConfig      `mapstructure:",squash"`
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
-
-	SwitchName string `mapstructure:"switch_name"`
+	VlanID                      string `mapstructure:"VlanID"`
+	SwitchName                  string `mapstructure:"switch_name"`
 
 	Communicator string `mapstructure:"communicator"`
 
@@ -264,7 +264,9 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 			RamSizeMB:  b.config.RamSizeMB,
 			DiskSize:   b.config.DiskSize,
 		},
-		&hypervcommon.StepConfigureVlan{},
+		&hypervcommon.StepConfigureVlan{
+			VlanID: b.config.VlanID,
+		},
 		&hypervcommon.StepEnableIntegrationService{},
 
 		&hypervcommon.StepMountDvdDrive{

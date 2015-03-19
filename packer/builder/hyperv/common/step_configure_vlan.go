@@ -11,11 +11,13 @@ import (
 	"github.com/mitchellh/packer/packer"
 )
 
-const (
-	vlanId = "130"
-)
+//const (
+//	vlanId = "130"
+//)
 
+//* added block
 type StepConfigureVlan struct {
+	VlanID string
 }
 
 func (s *StepConfigureVlan) Run(state multistep.StateBag) multistep.StepAction {
@@ -25,7 +27,7 @@ func (s *StepConfigureVlan) Run(state multistep.StateBag) multistep.StepAction {
 
 	errorMsg := "Error configuring vlan: %s"
 	vmName := state.Get("vmName").(string)
-	switchName := state.Get("SwitchName").(string)
+	//switchName := state.Get("SwitchName").(string)
 
 	ui.Say("Configuring vlan...")
 
@@ -36,8 +38,13 @@ func (s *StepConfigureVlan) Run(state multistep.StateBag) multistep.StepAction {
 		ui.Error(err.Error())
 		return multistep.ActionHalt
 	}*/
-
-	err := hyperv.SetVirtualMachineVlanId(vmName, vlanId)
+	//* added block
+	if s.VlanID == "" {
+		ui.Say("Hadn't config vlan ... ")
+	}
+	// change vlad param
+	//err := hyperv.SetVirtualMachineVlanId(vmName, vlanId)
+	err := hyperv.SetVirtualMachineVlanId(vmName, s.VlanID)
 	if err != nil {
 		err := fmt.Errorf(errorMsg, err)
 		state.Put("error", err)
