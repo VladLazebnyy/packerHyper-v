@@ -86,8 +86,8 @@ type config struct {
 	// By default this is "packer-BUILDNAME", where "BUILDNAME" is the name of the build.
 	VMName string `mapstructure:"vm_name"`
 	//user and password strings from config
-	DefaultUsername string `mapstructure:"user_name"`
-	DefaultPassword string `mapstructure:"user_pass"`
+	DefaultUsername string `mapstructure:"userName"`
+	DefaultPassword string `mapstructure:"userPass"`
 
 	ProductKey string `mapstructure:"product_key"`
 
