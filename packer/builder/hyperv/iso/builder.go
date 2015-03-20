@@ -95,8 +95,8 @@ type config struct {
 	VlanID                      string `mapstructure:"VlanID1"`
 	SwitchName                  string `mapstructure:"switch_name"`
 
-	//Username string `mapstructure:"Login"`
-	//Password string `mapstructure:"Pass"`
+	Username string `mapstructure:"Login"`
+	Password string `mapstructure:"Pass"`
 
 	Communicator string `mapstructure:"communicator"`
 
