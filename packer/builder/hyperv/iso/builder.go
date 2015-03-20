@@ -92,11 +92,11 @@ type config struct {
 	hypervcommon.OutputConfig   `mapstructure:",squash"`
 	hypervcommon.SSHConfig      `mapstructure:",squash"`
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
-	VlanID                      string `mapstructure:"VlanID"`
+	VlanID                      string `mapstructure:"VlanID1"`
 	SwitchName                  string `mapstructure:"switch_name"`
 
-	Username string `mapstructure:"Login"`
-	Password string `mapstructure:"Pass"`
+	//Username string `mapstructure:"Login"`
+	//Password string `mapstructure:"Pass"`
 
 	Communicator string `mapstructure:"communicator"`
 
@@ -199,7 +199,6 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	log.Println(fmt.Sprintf("%s: %v", "SwitchName", b.config.SwitchName))
 	log.Println(fmt.Sprintf("%s: %v", "ProductKey", b.config.ProductKey))
 	log.Println(fmt.Sprintf("%s: %v", "Communicator", b.config.Communicator))
-	log.Println(fmt.Sprintf("%s: %v", "Username", b.config.Username))
 
 	if b.config.RawSingleISOUrl == "" {
 		errs = packer.MultiErrorAppend(errs, errors.New("iso_url: The option can't be missed and a path must be specified."))
