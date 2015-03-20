@@ -32,8 +32,8 @@ const (
 
 	LowRam = 512 // 512MB
 
-	//DefaultUsername = "vagrant"
-	//DefaultPassword = "vagrant"
+	DefaultUsername = "vagrant1"
+	DefaultPassword = "vagrant1"
 )
 
 // Builder implements packer.Builder and builds the actual Hyperv
@@ -94,8 +94,8 @@ type config struct {
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
 	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
-	Username                    string `mapstructure:"Username"`
-	Password                    string `mapstructure:"Password"`
+	//Username                    string `mapstructure:"Username"`
+	//Password                    string `mapstructure:"Password"`
 
 	Communicator string `mapstructure:"communicator"`
 
@@ -304,8 +304,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		// new(hypervcommon.StepConfigureIp),
 
 		&hypervcommon.StepSetRemoting{
-			Username: b.config.Username,
-			Password: b.config.Password,
+			Username: DefaultUsername,
+			Password: DefaultPassword,
 		},
 
 		// &hypervcommon.StepCheckRemoting{},
