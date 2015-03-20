@@ -94,8 +94,9 @@ type config struct {
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
 	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
-	Username                    string `mapstructure:"Username"`
-	Password                    string `mapstructure:"Password"`
+
+	Username string `mapstructure:"UserName"`
+	Password string `mapstructure:"Password"`
 
 	Communicator string `mapstructure:"communicator"`
 
