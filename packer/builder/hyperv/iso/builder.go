@@ -92,11 +92,11 @@ type config struct {
 	hypervcommon.OutputConfig   `mapstructure:",squash"`
 	hypervcommon.SSHConfig      `mapstructure:",squash"`
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
-	VlanID                      string `mapstructure:"VlanID1"`
+	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
 
-	Username string `mapstructure:"Login"`
-	Password string `mapstructure:"Pass"`
+	Username string `mapstructure:"Username"`
+	Password string `mapstructure:"Password"`
 
 	Communicator string `mapstructure:"communicator"`
 
