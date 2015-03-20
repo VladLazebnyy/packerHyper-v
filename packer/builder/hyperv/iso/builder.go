@@ -305,8 +305,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		// new(hypervcommon.StepConfigureIp),
 
 		&hypervcommon.StepSetRemoting{
-			Username: DefaultUsername,
-			Password: DefaultPassword,
+			Username: b.config.DefaultUsername,
+			Password: b.config.DefaultPassword,
 		},
 
 		// &hypervcommon.StepCheckRemoting{},
