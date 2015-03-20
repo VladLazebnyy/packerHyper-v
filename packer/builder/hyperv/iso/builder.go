@@ -86,9 +86,6 @@ type config struct {
 	// By default this is "packer-BUILDNAME", where "BUILDNAME" is the name of the build.
 	VMName string `mapstructure:"vm_name"`
 	//user and password strings from config
-	DefaultUsername string `mapstructure:"userName"`
-	DefaultPassword string `mapstructure:"userPass"`
-
 	ProductKey string `mapstructure:"product_key"`
 
 	common.PackerConfig         `mapstructure:",squash"`
@@ -97,6 +94,8 @@ type config struct {
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
 	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
+	DefaultUsername             string `mapstructure:"userName"`
+	DefaultPassword             string `mapstructure:"userPass"`
 
 	Communicator string `mapstructure:"communicator"`
 
