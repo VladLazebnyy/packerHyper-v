@@ -94,8 +94,8 @@ type config struct {
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
 	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
-	DefaultUsername             string `mapstructure:"userName"`
-	DefaultPassword             string `mapstructure:"userPass"`
+	Username                    string `mapstructure:"Username"`
+	Password                    string `mapstructure:"Password"`
 
 	Communicator string `mapstructure:"communicator"`
 
@@ -304,8 +304,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		// new(hypervcommon.StepConfigureIp),
 
 		&hypervcommon.StepSetRemoting{
-			Username: b.config.DefaultUsername,
-			Password: b.config.DefaultPassword,
+			Username: b.config.Username,
+			Password: b.config.Password,
 		},
 
 		// &hypervcommon.StepCheckRemoting{},
