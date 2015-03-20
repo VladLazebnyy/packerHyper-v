@@ -32,8 +32,8 @@ const (
 
 	LowRam = 512 // 512MB
 
-	DefaultUsername = "vagrant1"
-	DefaultPassword = "vagrant1"
+	//DefaultUsername = "vagrant1"
+	//DefaultPassword = "vagrant1"
 )
 
 // Builder implements packer.Builder and builds the actual Hyperv
@@ -94,8 +94,8 @@ type config struct {
 	hypervcommon.ShutdownConfig `mapstructure:",squash"`
 	VlanID                      string `mapstructure:"VlanID"`
 	SwitchName                  string `mapstructure:"switch_name"`
-	//Username                    string `mapstructure:"Username"`
-	//Password                    string `mapstructure:"Password"`
+	Username                    string `mapstructure:"Username"`
+	Password                    string `mapstructure:"Password"`
 
 	Communicator string `mapstructure:"communicator"`
 
@@ -198,6 +198,7 @@ func (b *Builder) Prepare(raws ...interface{}) ([]string, error) {
 	log.Println(fmt.Sprintf("%s: %v", "SwitchName", b.config.SwitchName))
 	log.Println(fmt.Sprintf("%s: %v", "ProductKey", b.config.ProductKey))
 	log.Println(fmt.Sprintf("%s: %v", "Communicator", b.config.Communicator))
+	log.Println(fmt.Sprintf("%s: %v", "Username", b.config.Username))
 
 	if b.config.RawSingleISOUrl == "" {
 		errs = packer.MultiErrorAppend(errs, errors.New("iso_url: The option can't be missed and a path must be specified."))
@@ -304,8 +305,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		// new(hypervcommon.StepConfigureIp),
 
 		&hypervcommon.StepSetRemoting{
-			Username: DefaultUsername,
-			Password: DefaultPassword,
+			Username: b.config.Username,
+			Password: b.config.Password,
 		},
 
 		// &hypervcommon.StepCheckRemoting{},
