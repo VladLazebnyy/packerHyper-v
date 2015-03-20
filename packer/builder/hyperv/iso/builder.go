@@ -32,8 +32,8 @@ const (
 
 	LowRam = 512 // 512MB
 
-	DefaultUsername = "vagrant"
-	DefaultPassword = "vagrant"
+	//DefaultUsername = "vagrant"
+	//DefaultPassword = "vagrant"
 )
 
 // Builder implements packer.Builder and builds the actual Hyperv
@@ -85,6 +85,9 @@ type config struct {
 	// This is the name of the new virtual machine.
 	// By default this is "packer-BUILDNAME", where "BUILDNAME" is the name of the build.
 	VMName string `mapstructure:"vm_name"`
+	//user and password strings from config
+	DefaultUsername string `mapstructure:"user_name"`
+	DefaultPassword string `mapstructure:"user_pass"`
 
 	ProductKey string `mapstructure:"product_key"`
 
@@ -301,10 +304,10 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 
 		// new(hypervcommon.StepConfigureIp),
 
-		// &hypervcommon.StepSetRemoting{
-		// 	Username: DefaultUsername,
-		// 	Password: DefaultPassword,
-		// },
+		&hypervcommon.StepSetRemoting{
+			Username: DefaultUsername,
+			Password: DefaultPassword,
+		},
 
 		// &hypervcommon.StepCheckRemoting{},
 
