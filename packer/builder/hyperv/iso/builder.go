@@ -86,8 +86,8 @@ type config struct {
 	// By default this is "packer-BUILDNAME", where "BUILDNAME" is the name of the build.
 	VMName string `mapstructure:"vm_name"`
 	//user and password strings from config
-	DefaultUsername string `mapstructure:"user_name"`
-	DefaultPassword string `mapstructure:"user_pass"`
+	user_name string `mapstructure:"user_name"`
+	user_pass string `mapstructure:"user_pass"`
 
 	ProductKey string `mapstructure:"product_key"`
 
@@ -305,8 +305,8 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		// new(hypervcommon.StepConfigureIp),
 
 		&hypervcommon.StepSetRemoting{
-			Username: b.config.DefaultUsername,
-			Password: b.config.DefaultPassword,
+			Username: b.config.user_name,
+			Password: b.config.user_pass,
 		},
 
 		// &hypervcommon.StepCheckRemoting{},
