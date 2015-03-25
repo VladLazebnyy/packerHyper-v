@@ -14,7 +14,6 @@
     </dependencies>
   </metadata>
      <files>
-           <file src="packer\plugin\packer-provisioner-powershell\*.exe" target="" />
-           <file src="packer\plugin\packer-builder-hyperv-iso\*.exe" target="" />
+           <file src="c:\gopath\bin\*.exe" target="binaries" />
     </files>
 </package>
