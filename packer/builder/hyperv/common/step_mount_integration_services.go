@@ -6,20 +6,20 @@ package common
 
 import (
 	"fmt"
-	powershell "github.com/MSOpenTech/packer-hyperv/packer/powershell"
-	"github.com/mitchellh/multistep"
-	"github.com/mitchellh/packer/packer"
 	"log"
 	"os"
+	"github.com/mitchellh/multistep"
+	"github.com/mitchellh/packer/packer"
+	powershell "github.com/MSOpenTech/packer-hyperv/packer/powershell"
 )
 
 type StepMountSecondaryDvdImages struct {
-	Files         []string
+	Files [] string
 	dvdProperties []DvdControllerProperties
 }
 
 type DvdControllerProperties struct {
-	ControllerNumber   string
+	ControllerNumber string
 	ControllerLocation string
 }
 
@@ -34,13 +34,13 @@ func (s *StepMountSecondaryDvdImages) Run(state multistep.StateBag) multistep.St
 	// Will Windows assign DVD drives to A: and B: ?
 
 	// For IDE, there are only 2 controllers (0,1) with 2 locations each (0,1)
-	dvdProperties, err := s.mountFiles(vmName)
+	dvdProperties, err := s.mountFiles(vmName);
 	if err != nil {
 		state.Put("error", err)
 		ui.Error(err.Error())
 		return multistep.ActionHalt
 	}
-
+	
 	log.Println(fmt.Sprintf("Saving DVD properties %s DVDs", len(dvdProperties)))
 
 	state.Put("secondary.dvd.properties", dvdProperties)
@@ -51,6 +51,7 @@ func (s *StepMountSecondaryDvdImages) Run(state multistep.StateBag) multistep.St
 func (s *StepMountSecondaryDvdImages) Cleanup(state multistep.StateBag) {
 
 }
+
 
 func (s *StepMountSecondaryDvdImages) mountFiles(vmName string) ([]DvdControllerProperties, error) {
 
@@ -75,6 +76,7 @@ func (s *StepMountSecondaryDvdImages) mountFiles(vmName string) ([]DvdController
 	return dvdProperties, nil
 }
 
+
 func (s *StepMountSecondaryDvdImages) addAndMountIntegrationServicesSetupDisk(vmName string) (DvdControllerProperties, error) {
 
 	isoPath := os.Getenv("WINDIR") + "\\system32\\vmguest.iso"
@@ -86,13 +88,16 @@ func (s *StepMountSecondaryDvdImages) addAndMountIntegrationServicesSetupDisk(vm
 	return properties, nil
 }
 
+
+
+
 func (s *StepMountSecondaryDvdImages) addAndMountDvdDisk(vmName string, isoPath string) (DvdControllerProperties, error) {
 
 	var properties DvdControllerProperties
 	var script powershell.ScriptBuilder
 	powershell := new(powershell.PowerShellCmd)
 
-	// get the controller number that the OS install disk is mounted on
+	// get the controller number that the OS install disk is mounted on	
 	script.Reset()
 	script.WriteLine("param([string]$vmName)")
 	script.WriteLine("(Get-VMDvdDrive -VMName $vmName).ControllerNumber")
@@ -102,7 +107,7 @@ func (s *StepMountSecondaryDvdImages) addAndMountDvdDisk(vmName string, isoPath 
 	}
 
 	script.Reset()
-	script.WriteLine("param([string]$vmName,[string]$controllerNumber)")
+	script.WriteLine("param([string]$vmName,[int]$controllerNumber)")
 	script.WriteLine("Add-VMDvdDrive -VMName $vmName -ControllerNumber $controllerNumber")
 	err = powershell.Run(script.String(), vmName, controllerNumber)
 	if err != nil {
@@ -128,7 +133,7 @@ func (s *StepMountSecondaryDvdImages) addAndMountDvdDisk(vmName string, isoPath 
 		return properties, err
 	}
 
-	log.Println(fmt.Sprintf("ISO %s mounted on DVD controller %v, location %v", isoPath, controllerNumber, controllerLocation))
+	log.Println(fmt.Sprintf("ISO %s mounted on DVD controller %v, location %v",isoPath, controllerNumber, controllerLocation))
 
 	properties.ControllerNumber = controllerNumber
 	properties.ControllerLocation = controllerLocation
